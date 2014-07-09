@@ -16,7 +16,18 @@
       </nav>
     </header>      
     <div id="main">
-      <p>Bacon ipsum dolor sit amet tail sirloin venison flank. Landjaeger porchetta filet mignon bacon shankle drumstick chuck frankfurter pork belly. Chuck leberkas pastrami strip steak kielbasa venison swine. Shoulder biltong chicken short loin turducken strip steak. Meatloaf boudin turkey hamburger landjaeger sausage andouille t-bone pastrami tenderloin biltong ham.</p>
+      <h2>Contact</h2>
+      <button onclick="myFunction()">Click Me</button>
+      <p id="demo"></p>
+      <script>
+      function myFunction() {
+          var person = prompt("Please enter your name", "Your Name");
+          if (person != null) {
+              document.getElementById("demo").innerHTML =
+              "Hello " + person + "!";
+          }
+      }
+      </script>
     </div>
     <div id="side">
       <ul>
