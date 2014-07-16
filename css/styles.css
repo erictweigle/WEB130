@@ -28,11 +28,14 @@ header,footer{
   margin:1%;
   border:1px solid black;
   padding:1%;
-  height:200px;
+  height:auto;
   background:#fff;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+header{
+  height:200px;
 }
 nav{  
 }
@@ -84,6 +87,7 @@ nav ul li ul{
   visibility:hidden;
   opacity:0;
   transition:visibility 0s linear 0.5s, opacity 0.5s linear;
+  padding-left:0px;
 }
 nav ul li:hover ul{
   visibility:visible;
@@ -106,6 +110,22 @@ nav ul li ul li a:hover{
   }
 }
 @media all and (max-width:480px) {
+  header{
+    height:300px;
+    padding:0;
+    text-align:center;
+  }
+  nav{
+    padding:0;
+    margin:0 auto;
+  }
+  nav ul{
+    margin:0 auto;
+    width:94%;
+  }
+  nav ul li ul{
+    margin:0 auto;
+  }
   header h2{
     display:none;
   }
