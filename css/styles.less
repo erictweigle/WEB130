@@ -1,0 +1,134 @@
+@import "imports.less";
+
+/*** Mixins ***/
+.standardSettings {
+	border:@standardBorder;
+	padding:@standardPadding;
+  margin:@standardMargin;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background:@mainColor;
+}
+.specialRound {
+	-webkit-border-radius:@roundedCorners;
+	-moz-border-radius:@roundedCorners;
+	border-radius:@roundedCorners;
+}
+
+/*** main styles ***/
+body{
+  background:lighten(#0A2A12,10%);
+}
+#main{
+  .standardSettings;
+  width: 58%;
+  height: 400px;
+  float: left;
+  .specialRound;
+}
+#side{
+  .standardSettings;
+  width: 38%;
+  height: 400px;
+  float: right;
+  .specialRound;
+}
+header,footer{
+  .standardSettings;
+  clear:both;
+  width:98%;
+  height:auto;
+  .specialRound;
+}
+header{
+  height:200px;
+}
+/*** nav styles ***/
+nav ul{
+  list-style-type:none;
+  padding-left: 10px;
+  position: relative;
+  li{
+    float:left;
+    a{
+      background:#778899;
+      text-decoration:none;
+      padding:10px 20px;
+      display:block;
+      &:hover{
+        background:skyblue;
+        color:black;
+      }
+    }
+    /*** submenu styles ***/
+    ul{
+      position:absolute;
+      visibility:hidden;
+      opacity:0;
+      transition:visibility 0s linear 0.5s, opacity 0.5s linear;
+      padding-left:0px;
+      li{
+        float:none;
+        background:#778899;
+        a:hover{
+          background:magenta;
+        }
+      }
+    }
+    &:hover ul{
+      visibility:visible;
+      opacity:1;
+      transition-delay:0s;
+    }
+  }
+}
+
+/*** media queries ***/
+@media all and (min-width:481px) and (max-width:779px) {
+  body{
+    background:skyblue;
+  }
+}
+@media all and (max-width:480px) {    
+  body{
+    background:orange;
+  }
+  header{
+    height:300px;
+    padding: @phonePadding;
+    text-align:center;
+    h2{
+      display:none;
+    }
+  }  
+  #main, #side{
+    height:auto;
+    float: left;
+    width: 98%;
+  }
+  #side, footer{
+    font-size:10px;
+  }  
+  nav{
+    padding:@phonePadding;
+    margin:@phoneMargin;
+    ul{
+      margin:@phoneMargin;
+      width:94%;
+      li{
+        display:block;
+        float:left;
+        padding:5px;
+        margin:@phoneMargin;
+        width:96%;
+        background:#999;
+        text-align:center;
+        ul{
+          margin:@phoneMargin;
+        }
+      }      
+    }
+  }
+/***  end media queries  ***/
+}
