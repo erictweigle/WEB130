@@ -2,6 +2,112 @@
   <head>
     <title>Eric Weigle</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <style type="text/css">
+    .error {
+      color: red;
+    }
+    .hidden {
+      display: none;
+    }
+    </style>
+    <script type="text/javascript">
+      window.onload = function() {
+        document.getElementById("contact-form").onsubmit = validateForm;
+      }
+      
+      function validateForm() {
+        var validFirstName = validateTextField("first-name", "error-first-name");
+        var validLastName = validateTextField("last-name", "error-last-name");
+        var validAddress = validateTextField("address", "error-address");
+        var validZip = validateZip("zip", "error-zip");
+        var validEmail = validateEmail("email1", "email2", "error-email");
+        var validLanguage = validateCheckBox("language", "error-english");
+        var validCar = validateRadio("car", "error-car");
+
+        return validFirstName && validLastName && validAddress && validZip && validEmail && validLanguage && validCar;
+
+      }
+
+      function validateZip(fieldId, errorId){
+        //take a parameter and test any text field
+        var zip = document.getElementById(fieldId).value;
+        var errorSpan = document.getElementById(errorId);
+
+        if(zip.length <5) {
+          //show error and stay
+          errorSpan.className = "error";
+          return false;
+        } else {
+          //hide error and succeed
+          errorSpan.className = "hidden";
+          return true;
+        }
+      }
+      
+      function validateTextField(fieldId, errorId){
+        //take a parameter and test any text field
+        var fieldText = document.getElementById(fieldId).value;
+        var errorSpan = document.getElementById(errorId);
+
+        if(fieldText === "") {
+          //show error and stay
+          errorSpan.className = "error";
+          return false;
+        } else {
+          //hide error and succeed
+          errorSpan.className = "hidden";
+          return true;
+        }
+      }
+      
+      function validateEmail(field1Id, field2Id, errorId){
+        //take a parameter and test any text field
+        var emailField1 = document.getElementById(field1Id).value;
+        var emailField2 = document.getElementById(field2Id).value;
+        var errorSpan = document.getElementById(errorId);
+
+        if(emailField1 == emailField2) {
+          //hide error and succeed
+          errorSpan.className = "hidden";
+          return true;
+        }else{          
+          errorSpan.className = "error";
+          return false;
+        }
+      }
+      
+      function validateRadio(fieldId, errorId){
+        //take a parameter and test any text field
+        var radio = document.getElementById(fieldId);
+        var errorSpan = document.getElementById(errorId);
+
+        if(!radio.checked) {
+          //show error and stay
+          errorSpan.className = "error";
+          return false;
+        } else {
+          //hide error and succeed
+          errorSpan.className = "hidden";
+          return true;
+        }
+      }
+
+      function validateCheckBox(fieldId, errorId){
+        //take a parameter and test any text field
+        var checkBox = document.getElementById(fieldId);
+        var errorSpan = document.getElementById(errorId);
+
+        if(!checkBox.checked) {
+          //show error and stay
+          errorSpan.className = "error";
+          return false;
+        } else {
+          //hide error and succeed
+          errorSpan.className = "hidden";
+          return true;
+        }
+      }    
+    </script>
   </head>
   <body>
     <header>
@@ -24,17 +130,73 @@
     </header>      
     <div id="main">
       <h2>Contact</h2>
-      <button onclick="myFunction()">Click Me</button>
-      <p id="demo"></p>
-      <script>
-      function myFunction() {
-          var person = prompt("Please enter your name", "Your Name");
-          if (person != null) {
-              document.getElementById("demo").innerHTML =
-              "Hello " + person + "!";
-          }
-      }
-      </script>
+      
+      <form id="contact-form" action="success.html">
+        <p>
+          <label for="first-name">First Name:
+            <input type="text" name="first-name" id="first-name">
+            <span id="error-first-name" class="hidden">* Blank</span>
+          </label>
+        </p>
+        <p>
+          <label for="last-name">Last Name:
+            <input type="text" name="last-name" id="last-name">
+            <span id="error-last-name" class="hidden">* Blank</span>
+          </label>
+        </p>
+        <p>
+          <label for="address">Address:
+            <input type="text" name="address" id="address">
+            <span id="error-address" class="hidden">* Blank</span>  
+          </label>
+        </p>        
+        <p>
+          <label for="city">City:
+            <select name="city">
+              <option value="seattle">Seattle</option>
+              <option value="chicago">Chicago</option>
+              <option value="cleveland">Cleveland</option>
+              <option value="miami">Miami</option>
+              <option value="other">Other</option>
+            </select>
+            <span id="error-city" class="hidden">* Blank</span>     
+          </label>
+        </p>
+        <p>
+          <label for="zip">Zip:
+            <input type="text" name="zip" id="zip">
+            <span id="error-zip" class="hidden">* Not a valid zip</span>  
+          </label>
+        </p>
+        <p>
+          <label for="email1">Email:
+            <input type="email" name="email" id="email1">
+            <span id="error-email" class="hidden">* Your emails do not match</span>  
+          </label>
+        </p> 
+        <p>
+          <label for="email2">Confirm Email:
+            <input type="email" name="email" id="email2"> 
+          </label>
+        </p>
+        <p>
+          <label for="language">
+            <input type="checkbox" id="language" name="english">English
+            <span id="error-english" class="hidden">* You definitely speak English</span><br>
+            <input type="checkbox" id="language" name="spanish">Spanish<br>
+            <input type="checkbox" id="language" name="french">French<br>
+            <input type="checkbox" id="language" name="german">German
+          </label>
+        </p>        
+        <p>
+          <label for="car">Do you own a car?:<br>
+            <input type="radio" id = "car" name="car" value="yes"> Yes<br>
+            <input type="radio" id = "car" name="car" value="no"> No
+            <span id="error-car" class="hidden">* Blank</span>
+          </label>
+        </p>
+        <button name="submit" id="submit">Submit</button>
+      </form>
     </div>
     <div id="side">
       <ul>
